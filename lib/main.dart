@@ -1,4 +1,5 @@
 import 'package:eateryhub/screen/home/discover_screen.dart';
+import 'package:eateryhub/style/theme/eateryhub_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,9 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: EateryhubTheme.lightTheme,
+      darkTheme: EateryhubTheme.darkTheme,
+      themeMode: ThemeMode.system,
       home: DiscoverScreen(),
     );
   }
