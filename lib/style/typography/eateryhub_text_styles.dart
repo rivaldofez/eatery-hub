@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EateryhubTextStyles {
-  static const TextStyle _commonStyle = TextStyle(fontFamily: "Epilogue");
+  static const TextStyle _commonStyle = TextStyle(fontFamily: "DMSans");
 
   /// displayLarge Text Style
   static TextStyle displayLarge = _commonStyle.copyWith(

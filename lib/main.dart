@@ -1,3 +1,4 @@
+import 'package:eateryhub/screen/detail/detail_screen.dart';
 import 'package:eateryhub/screen/home/discover_screen.dart';
 import 'package:eateryhub/style/theme/eateryhub_theme.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: EateryhubTheme.lightTheme,
       darkTheme: EateryhubTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: DiscoverScreen(),
+      home: DetailScreen(),
     );
   }
 }
