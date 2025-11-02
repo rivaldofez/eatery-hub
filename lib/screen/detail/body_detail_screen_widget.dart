@@ -81,7 +81,9 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
           MenuSection(title: "Makanan :", items: detailRestaurant.menus.foods.map( (item) => item.name ).toList()),
           MenuSection(title: "Minuman :", items: detailRestaurant.menus.drinks.map( (item) => item.name ).toList()),
         ]), 
-        DetailReviewTabPage()
+        DetailReviewTabPage(
+          reviews: detailRestaurant.customerReviews,
+        )
         ]
         ),
     );
