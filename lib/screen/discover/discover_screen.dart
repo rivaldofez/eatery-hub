@@ -33,7 +33,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             LoadingState<List<Restaurant>>() => Center(
               child: CircularProgressIndicator(),
             ),
-
             LoadedState<List<Restaurant>>(data: var restaurantList) =>
               ListView.builder(
                 itemCount: restaurantList.length,
