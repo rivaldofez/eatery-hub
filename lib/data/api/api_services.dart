@@ -52,6 +52,14 @@ class ApiServices {
     );
   }
 
+  Future<RestaurantListResponse> getSearchRestaurantList(String query) {
+    return _handleRequest<RestaurantListResponse>(
+      Uri.parse("$_baseUrl/search?q=$query"),
+      (json) => RestaurantListResponse.fromJson(json),
+      defaultError: "Gagal memuat daftar restoran.",
+    );
+  }
+
   Future<DetailRestaurantResponse> getDetailRestaurant(String id) {
     return _handleRequest<DetailRestaurantResponse>(
       Uri.parse("$_baseUrl/detail/$id"),

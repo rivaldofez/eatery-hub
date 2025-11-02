@@ -19,7 +19,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   void initState() {
     super.initState();
 
-    Future.microtask(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
       context.read<RestaurantListProvider>().fetchRestaurantList();
     });
   }
@@ -27,7 +28,17 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Discover")),
+      appBar: AppBar(
+        title: Text("Restaurant"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, NavigationRoute.searchRoute.name);
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
+      ),
       body: Consumer<RestaurantListProvider>(
         builder: (context, value, child) {
           return switch (value.resultState) {
@@ -52,7 +63,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   );
                 },
               ),
-            ErrorState<List<Restaurant>>(error: var message) => ErrorCard(message: message),
+            ErrorState<List<Restaurant>>(error: var message) => ErrorCard(
+              message: message,
+            ),
             _ => SizedBox(),
           };
         },

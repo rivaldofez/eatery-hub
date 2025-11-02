@@ -1,8 +1,6 @@
 import 'package:eateryhub/data/model/detail_restaurant.dart';
 import 'package:eateryhub/provider/detail/restaurant_detail_provider.dart';
 import 'package:eateryhub/screen/detail/body_detail_screen_widget.dart';
-import 'package:eateryhub/screen/detail/page/menu/detail_menu_tab_page.dart';
-import 'package:eateryhub/screen/detail/page/review/detail_review_tab_page.dart';
 import 'package:eateryhub/static/base_result_state.dart';
 import 'package:eateryhub/widget/error_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +20,12 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
 
-    Future.microtask(() {
-      context.read<RestaurantDetailProvider>().fetchRestaurantDetail(
-        widget.restaurantid,
-      );
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (!mounted) return;
+    context.read<RestaurantDetailProvider>().fetchRestaurantDetail(
+      widget.restaurantid,
+    );
+  });
   }
 
   @override
