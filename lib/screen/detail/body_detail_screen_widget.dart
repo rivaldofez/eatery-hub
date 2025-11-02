@@ -76,7 +76,14 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
           ),
         ),
       ],
-      body: TabBarView(children: [DetailMenuTabPage(), DetailReviewTabPage()]),
+      body: TabBarView(
+        children: [DetailMenuTabPage(sections: [
+          MenuSection(title: "Makanan :", items: detailRestaurant.menus.foods.map( (item) => item.name ).toList()),
+          MenuSection(title: "Minuman :", items: detailRestaurant.menus.drinks.map( (item) => item.name ).toList()),
+        ]), 
+        DetailReviewTabPage()
+        ]
+        ),
     );
   }
 }
@@ -84,21 +91,26 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
 class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
   final TabBar _tabbar;
   _SliverTabBarDelegate(this._tabbar);
-  
+
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
       child: _tabbar,
     );
   }
-  
+
   @override
   double get maxExtent => _tabbar.preferredSize.height;
-  
+
   @override
   double get minExtent => _tabbar.preferredSize.height;
-  
+
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
+      false;
 }

@@ -1,24 +1,49 @@
 import 'package:flutter/material.dart';
 
+class MenuSection {
+  final String title;
+  final List<String> items;
+
+  MenuSection({required this.title, required this.items});
+}
 
 class DetailMenuTabPage extends StatelessWidget {
-  const DetailMenuTabPage({super.key});
+  const DetailMenuTabPage({super.key, required this.sections});
+
+  final List<MenuSection> sections;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Text(
-            "Food",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return CustomScrollView(
+      slivers: [
+        for (final section in sections) ...[
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Text(
+                section.title,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
           ),
-          Text(
-            "Food",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final item = section.items[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 4,
+                ),
+                child: Text(
+                  item,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              );
+            }, childCount: section.items.length),
           ),
         ],
-      ),
+      ],
     );
   }
 }
