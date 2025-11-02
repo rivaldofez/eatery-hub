@@ -2,6 +2,7 @@ import 'package:eateryhub/data/model/restaurant.dart';
 import 'package:eateryhub/provider/discover/restaurant_list_provider.dart';
 import 'package:eateryhub/screen/discover/restaurant_card_widget.dart';
 import 'package:eateryhub/static/base_result_state.dart';
+import 'package:eateryhub/static/navigation_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +41,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   final restaurant = restaurantList[index];
                   return RestaurantCardWidget(
                     restaurant: restaurant,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        NavigationRoute.detailRoute.name,
+                        arguments: restaurant.id,
+                      );
+                    },
                   );
                 },
               ),

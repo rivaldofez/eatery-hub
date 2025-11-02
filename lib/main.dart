@@ -2,6 +2,7 @@ import 'package:eateryhub/data/api/api_services.dart';
 import 'package:eateryhub/provider/discover/restaurant_list_provider.dart';
 import 'package:eateryhub/screen/detail/detail_screen.dart';
 import 'package:eateryhub/screen/discover/discover_screen.dart';
+import 'package:eateryhub/static/navigation_route.dart';
 import 'package:eateryhub/style/theme/eateryhub_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,11 @@ class MyApp extends StatelessWidget {
       theme: EateryhubTheme.lightTheme,
       darkTheme: EateryhubTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: DiscoverScreen(),
+      initialRoute: NavigationRoute.mainRoute.name,
+      routes: {
+        NavigationRoute.mainRoute.name: (context) => DiscoverScreen(),
+        NavigationRoute.detailRoute.name: (context) => DetailScreen()
+      },
     );
   }
 }
