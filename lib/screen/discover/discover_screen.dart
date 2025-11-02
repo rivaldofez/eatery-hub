@@ -3,6 +3,7 @@ import 'package:eateryhub/provider/discover/restaurant_list_provider.dart';
 import 'package:eateryhub/screen/discover/restaurant_card_widget.dart';
 import 'package:eateryhub/static/base_result_state.dart';
 import 'package:eateryhub/static/navigation_route.dart';
+import 'package:eateryhub/widget/error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             LoadingState<List<Restaurant>>() => Center(
               child: CircularProgressIndicator(),
             ),
+
             LoadedState<List<Restaurant>>(data: var restaurantList) =>
               ListView.builder(
                 itemCount: restaurantList.length,
@@ -50,9 +52,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   );
                 },
               ),
-            ErrorState<List<Restaurant>>(error: var message) => Center(
-              child: Text(message),
-            ),
+            ErrorState<List<Restaurant>>(error: var message) => ErrorCard(message: message),
             _ => SizedBox(),
           };
         },

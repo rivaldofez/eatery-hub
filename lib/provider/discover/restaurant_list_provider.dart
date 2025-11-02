@@ -1,3 +1,4 @@
+import 'package:eateryhub/data/api/api_exception.dart';
 import 'package:eateryhub/data/api/api_services.dart';
 import 'package:eateryhub/data/model/restaurant.dart';
 import 'package:eateryhub/static/base_result_state.dart';
@@ -27,7 +28,8 @@ class RestaurantListProvider extends ChangeNotifier {
         notifyListeners();
       }
     } on Exception catch (e) {
-      _resultState = ErrorState<List<Restaurant>>(e.toString());
+      final message = ApiException.humanize(e);
+      _resultState = ErrorState<List<Restaurant>>(message);
       notifyListeners();
     }
   }

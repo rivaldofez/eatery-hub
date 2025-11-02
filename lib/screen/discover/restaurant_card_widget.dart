@@ -41,11 +41,14 @@ class RestaurantCardWidget extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
-                  child: Image.network(
-                    "https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}",
-                    width: double.infinity,
-                    height: 200,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: restaurant.pictureId,
+                    child: Image.network(
+                      "https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}",
+                      width: double.infinity,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Padding(

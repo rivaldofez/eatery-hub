@@ -16,11 +16,14 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                width: double.infinity,
-                height: 300,
-                fit: BoxFit.cover,
-                "https://restaurant-api.dicoding.dev/images/large/${detailRestaurant.pictureId}",
+              Hero(
+                tag: detailRestaurant.pictureId,
+                child: Image.network(
+                  width: double.infinity,
+                  height: 300,
+                  fit: BoxFit.cover,
+                  "https://restaurant-api.dicoding.dev/images/large/${detailRestaurant.pictureId}",
+                ),
               ),
               Padding(
                 padding: EdgeInsets.all(16),

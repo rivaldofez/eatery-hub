@@ -4,6 +4,7 @@ import 'package:eateryhub/screen/detail/body_detail_screen_widget.dart';
 import 'package:eateryhub/screen/detail/page/menu/detail_menu_tab_page.dart';
 import 'package:eateryhub/screen/detail/page/review/detail_review_tab_page.dart';
 import 'package:eateryhub/static/base_result_state.dart';
+import 'package:eateryhub/widget/error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,8 +44,8 @@ class _DetailScreenState extends State<DetailScreen> {
 
               LoadedState<DetailRestaurant>(data: var detailRestaurant) =>
                 BodyOfDetailScreenWidget(detailRestaurant: detailRestaurant),
-
-              ErrorState(error: var message) => Center(child: Text(message)),
+                
+              ErrorState<DetailRestaurant>(error: var message) => ErrorCard(message: message),
 
               _ => SizedBox(),
             };
