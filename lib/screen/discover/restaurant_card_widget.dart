@@ -58,19 +58,21 @@ class RestaurantCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        restaurant.city,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      Text(
                         restaurant.name,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       Row(
                         spacing: 8,
                         children: [
-                          const Icon(Icons.star, size: 20),
+                          Icon(Icons.star, size: 20),
                           Text(
                             "${restaurant.rating} / 5.0",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          Spacer(),
+                          Icon(Icons.location_city, size: 20),
+                          Text(
+                            restaurant.city,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ],
