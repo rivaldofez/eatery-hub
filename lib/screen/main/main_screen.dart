@@ -1,6 +1,7 @@
 import 'package:eateryhub/provider/main/bottom_nav_provider.dart';
 import 'package:eateryhub/screen/discover/discover_screen.dart';
 import 'package:eateryhub/screen/favorite/favorite_screen.dart';
+import 'package:eateryhub/screen/setting/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,8 @@ class MainScreen extends StatelessWidget {
         builder: (context, value, child) {
           return switch (value.indexBottomNavBar) {
             0 => const DiscoverScreen(),
-            _ => const FavoriteScreen(),
+            1 => const FavoriteScreen(),
+            _ => const SettingsScreen(),
           };
         },
       ),
@@ -26,13 +28,18 @@ class MainScreen extends StatelessWidget {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Home",
-            tooltip: "Home",
+            label: "Discover",
+            tooltip: "Discover",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmarks),
+            icon: Icon(Icons.favorite),
             label: "Favorites",
-            tooltip: "Bookmarks",
+            tooltip: "Favorites",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings",
+            tooltip: "Settings",
           ),
         ],
       ),
