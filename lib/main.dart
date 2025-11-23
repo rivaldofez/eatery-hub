@@ -1,9 +1,11 @@
 import 'package:eateryhub/data/api/api_services.dart';
 import 'package:eateryhub/provider/detail/restaurant_detail_provider.dart';
 import 'package:eateryhub/provider/discover/restaurant_list_provider.dart';
+import 'package:eateryhub/provider/main/bottom_nav_provider.dart';
 import 'package:eateryhub/provider/search/restaurant_search_provider.dart';
 import 'package:eateryhub/screen/detail/detail_screen.dart';
 import 'package:eateryhub/screen/discover/discover_screen.dart';
+import 'package:eateryhub/screen/main/main_screen.dart';
 import 'package:eateryhub/screen/search/search_screen.dart';
 import 'package:eateryhub/static/navigation_route.dart';
 import 'package:eateryhub/style/theme/eateryhub_theme.dart';
@@ -14,6 +16,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => BottomNavProvider()),
         Provider(create: (context) => ApiServices()),
         ChangeNotifierProvider(
           create: (context) =>
@@ -45,7 +48,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       initialRoute: NavigationRoute.mainRoute.name,
       routes: {
-        NavigationRoute.mainRoute.name: (context) => DiscoverScreen(),
+        NavigationRoute.mainRoute.name: (context) => MainScreen(),
         NavigationRoute.detailRoute.name: (context) => DetailScreen(
           restaurantid: ModalRoute.of(context)?.settings.arguments as String,
         ),
