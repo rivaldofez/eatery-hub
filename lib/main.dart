@@ -1,6 +1,8 @@
 import 'package:eateryhub/data/api/api_services.dart';
+import 'package:eateryhub/data/local/local_database_service.dart';
 import 'package:eateryhub/provider/detail/restaurant_detail_provider.dart';
 import 'package:eateryhub/provider/discover/restaurant_list_provider.dart';
+import 'package:eateryhub/provider/favorite/favorite_provider.dart';
 import 'package:eateryhub/provider/main/bottom_nav_provider.dart';
 import 'package:eateryhub/provider/search/restaurant_search_provider.dart';
 import 'package:eateryhub/screen/detail/detail_screen.dart';
@@ -29,6 +31,11 @@ void main() {
         ChangeNotifierProvider(
           create: (context) =>
               RestaurantSearchProvider(context.read<ApiServices>()),
+        ),
+        Provider(create: (context) => LocalDatabaseService()),
+        ChangeNotifierProvider(
+          create: (context) =>
+              FavoriteProvider(context.read<LocalDatabaseService>()),
         ),
       ],
       child: MyApp(),

@@ -1,6 +1,9 @@
 import 'package:eateryhub/data/model/detail_restaurant.dart';
+import 'package:eateryhub/data/model/restaurant.dart';
 import 'package:eateryhub/provider/detail/restaurant_detail_provider.dart';
-import 'package:eateryhub/screen/detail/body_detail_screen_widget.dart';
+import 'package:eateryhub/provider/favorite/favorite_icon_provider.dart';
+import 'package:eateryhub/screen/detail/widget/body_detail_screen_widget.dart';
+import 'package:eateryhub/screen/detail/widget/favorite_icon_widget.dart';
 import 'package:eateryhub/static/base_result_state.dart';
 import 'package:eateryhub/widget/error_widget.dart';
 import 'package:flutter/material.dart';
@@ -21,11 +24,11 @@ class _DetailScreenState extends State<DetailScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-    if (!mounted) return;
-    context.read<RestaurantDetailProvider>().fetchRestaurantDetail(
-      widget.restaurantid,
-    );
-  });
+      if (!mounted) return;
+      context.read<RestaurantDetailProvider>().fetchRestaurantDetail(
+        widget.restaurantid,
+      );
+    });
   }
 
   @override
@@ -33,7 +36,32 @@ class _DetailScreenState extends State<DetailScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(title: Text("Detail Restaurant")),
+        appBar: AppBar(
+          title: Text("Detail Restaurant"),
+          actions: [
+            ChangeNotifierProvider(
+              create: (context) => FavoriteIconProvider(),
+              child: Consumer<RestaurantDetailProvider>(
+                builder: (context, value, child) {
+                  return switch (value.resultState) {
+                    LoadedState<DetailRestaurant>(data: var detailRestaurant) =>
+                      FavoriteIconWidget(
+                        restaurant: Restaurant(
+                          id: detailRestaurant.id,
+                          name: detailRestaurant.name,
+                          description: detailRestaurant.description,
+                          pictureId: detailRestaurant.pictureId,
+                          city: detailRestaurant.city,
+                          rating: detailRestaurant.rating,
+                        ),
+                      ),
+                    _ => SizedBox(),
+                  };
+                },
+              ),
+            ),
+          ],
+        ),
         body: Consumer<RestaurantDetailProvider>(
           builder: (context, value, child) {
             return switch (value.resultState) {
@@ -43,8 +71,10 @@ class _DetailScreenState extends State<DetailScreen> {
 
               LoadedState<DetailRestaurant>(data: var detailRestaurant) =>
                 BodyOfDetailScreenWidget(detailRestaurant: detailRestaurant),
-                
-              ErrorState<DetailRestaurant>(error: var message) => ErrorCard(message: message),
+
+              ErrorState<DetailRestaurant>(error: var message) => ErrorCard(
+                message: message,
+              ),
 
               _ => SizedBox(),
             };
