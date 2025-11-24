@@ -18,7 +18,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.initState();
 
     Future.microtask(() {
-      context.read<SettingsProvider>().getThemeOption();
+      final settingProvider = context.read<SettingsProvider>();
+      settingProvider.getThemeOption();
+      settingProvider.getLunchNotification();
     });
   }
 
@@ -75,13 +77,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
 
-              // NOTIFICATION TOGGLE
               SwitchListTile(
                 title: const Text("Lunch 11:00 AM"),
-                value: notificationsEnabled,
+                value: value.isLunchNotificationEnabled ?? false,
                 onChanged: (value) {
-                  setState(() => notificationsEnabled = value);
-                  // TODO: your action
+                  final settingProvider = context.read<SettingsProvider>();
+                  settingProvider.toggleLunchNotification(value);
                 },
               ),
             ],

@@ -41,6 +41,12 @@ class LocalNotificationService {
     );
   }
 
+  Future<void> configureLocalTimeZone() async {
+    tz.initializeTimeZones();
+    final TimezoneInfo timezoneInfo = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timezoneInfo.identifier));
+  }
+
   Future<bool> _isAndroidPermissionGranted() async {
     return await flutterLocalNotificationsPlugin
             .resolvePlatformSpecificImplementation<
@@ -114,6 +120,8 @@ class LocalNotificationService {
     required int id,
     String channelId = "3",
     String channelName = "Schedule Notification",
+    required String title,
+    required String description,
     int time = 11,
   }) async {
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
@@ -134,8 +142,8 @@ class LocalNotificationService {
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
-      'Daily scheduled notification title',
-      'This is a body of daily scheduled notification',
+      title,
+      description,
       datetimeSchedule,
       notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,

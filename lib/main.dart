@@ -1,5 +1,6 @@
 import 'package:eateryhub/data/api/api_services.dart';
 import 'package:eateryhub/data/local/local_database_service.dart';
+import 'package:eateryhub/data/local/local_notification_service.dart';
 import 'package:eateryhub/data/local/shared_preferences_service.dart';
 import 'package:eateryhub/provider/detail/restaurant_detail_provider.dart';
 import 'package:eateryhub/provider/discover/restaurant_list_provider.dart';
@@ -43,10 +44,20 @@ void main() async {
               FavoriteProvider(context.read<LocalDatabaseService>()),
         ),
         Provider(create: (context) => SharedPreferencesService(prefs)),
+        Provider(
+          create: (context) => LocalNotificationService()
+            ..init()
+            ..configureLocalTimeZone(),
+        ),
         ChangeNotifierProvider(
           create: (context) =>
-              SettingsProvider(context.read<SharedPreferencesService>())
-                ..getThemeOption(),
+              SettingsProvider(
+                  context.read<SharedPreferencesService>(),
+                  context.read<LocalNotificationService>(),
+                )
+                ..getThemeOption()
+                ..getLunchNotification()
+                ..requestNotificationPermission(),
         ),
       ],
       child: MyApp(),
