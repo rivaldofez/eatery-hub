@@ -68,7 +68,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
               const SizedBox(height: 24),
               const Padding(
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
                 child: Text(
                   "Notifications",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -77,7 +77,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
               // NOTIFICATION TOGGLE
               SwitchListTile(
-                title: const Text("Enable Notifications"),
+                title: const Text("Lunch 11:00 AM"),
                 value: notificationsEnabled,
                 onChanged: (value) {
                   setState(() => notificationsEnabled = value);
