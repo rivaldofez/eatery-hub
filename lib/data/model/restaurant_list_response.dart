@@ -1,27 +1,33 @@
-
 import 'package:eateryhub/data/model/restaurant.dart';
+import 'package:equatable/equatable.dart';
 
-class RestaurantListResponse {
-    bool error;
-    String? message;
-    List<Restaurant> restaurants;
+class RestaurantListResponse extends Equatable {
+  bool error;
+  String? message;
+  List<Restaurant> restaurants;
 
-    RestaurantListResponse({
-        required this.error,
-        required this.message,
+  RestaurantListResponse({
+    required this.error,
+    required this.message,
 
-        required this.restaurants,
-    });
+    required this.restaurants,
+  });
 
-    factory RestaurantListResponse.fromJson(Map<String, dynamic> json) => RestaurantListResponse(
+  factory RestaurantListResponse.fromJson(Map<String, dynamic> json) =>
+      RestaurantListResponse(
         error: json["error"],
         message: json["message"],
-        restaurants: List<Restaurant>.from(json["restaurants"].map((x) => Restaurant.fromJson(x))),
-    );
+        restaurants: List<Restaurant>.from(
+          json["restaurants"].map((x) => Restaurant.fromJson(x)),
+        ),
+      );
 
-    Map<String, dynamic> toJson() => {
-        "error": error,
-        "message": message,
-        "restaurants": List<dynamic>.from(restaurants.map((x) => x.toJson())),
-    };
+  Map<String, dynamic> toJson() => {
+    "error": error,
+    "message": message,
+    "restaurants": List<dynamic>.from(restaurants.map((x) => x.toJson())),
+  };
+
+  @override
+  List<Object?> get props => [error, message, restaurants];
 }
