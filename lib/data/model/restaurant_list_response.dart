@@ -1,15 +1,15 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
 import 'package:eateryhub/data/model/restaurant.dart';
 import 'package:equatable/equatable.dart';
 
 class RestaurantListResponse extends Equatable {
-  bool error;
-  String? message;
-  List<Restaurant> restaurants;
+  final bool error;
+  final String? message;
+  final List<Restaurant> restaurants;
 
   RestaurantListResponse({
     required this.error,
     required this.message,
-
     required this.restaurants,
   });
 

@@ -1,6 +1,5 @@
 import 'package:eateryhub/data/local/local_notification_service.dart';
 import 'package:eateryhub/data/local/shared_preferences_service.dart';
-import 'package:eateryhub/data/model/restaurant.dart';
 import 'package:eateryhub/data/model/theme_option.dart';
 import 'package:flutter/foundation.dart';
 

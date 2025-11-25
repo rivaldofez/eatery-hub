@@ -48,6 +48,18 @@ class RestaurantCardWidget extends StatelessWidget {
                       width: double.infinity,
                       height: 200,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: double.infinity,
+                          height: 200,
+                          color: Colors.grey.shade200,
+                          child: const Icon(
+                            Icons.broken_image,
+                            size: 60,
+                            color: Colors.grey,
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),

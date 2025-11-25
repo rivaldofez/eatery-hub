@@ -18,6 +18,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.initState();
 
     Future.microtask(() {
+      if (!mounted) return;
       final settingProvider = context.read<SettingsProvider>();
       settingProvider.getThemeOption();
       settingProvider.getLunchNotification();
